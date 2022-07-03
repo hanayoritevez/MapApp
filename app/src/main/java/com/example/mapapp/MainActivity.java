@@ -8,6 +8,9 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +34,25 @@ public class MainActivity extends AppCompatActivity {
         mMapView.setBuiltInZoomControls(true);
         mMapView.setMultiTouchControls(true);
 
+        setupMarker();
+
     }
+
+
+    private void setupMarker(){
+    MarkerInterFace util = new MarkerInterFace(this );
+    List<MarkerInterFace.Node> nodes =  util.getNodes();
+
+    // create and show markers
+    for(MarkerInterFace.Node node: nodes ) {
+        Marker marker = new Marker( mMapView );
+        marker.setPosition( new GeoPoint(node.lat, node.lon ) );
+        marker.setTitle ( node.title );
+        marker.setSnippet( node.description );
+        mMapView.getOverlays().add(marker);
+    } // for
+
+} //  setupMarker
 
 
 
