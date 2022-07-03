@@ -3,6 +3,7 @@ package com.example.mapapp;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -30,11 +31,16 @@ public class MainActivity extends AppCompatActivity {
         IMapController mapController =  mMapView.getController();
         mapController.setZoom(MAP_ZOOM);
         GeoPoint centerPoint = new GeoPoint( MAP_LAT,MAP_LON );
+
+        Log.d("main", "steup marker start");
+        setupMarker();
+        Log.d("main", "steup marker done");
+
         mapController.setCenter(centerPoint);
         mMapView.setBuiltInZoomControls(true);
         mMapView.setMultiTouchControls(true);
 
-        setupMarker();
+
 
     }
 

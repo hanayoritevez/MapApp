@@ -51,10 +51,12 @@ public class MarkerInterFace {
 
         List<String> lines = readAsset(FILE_NAME);
 
+        Log.d("marker", String.valueOf(lines.size()));
         for(String line: lines) {
             // latitude, longitude,  title,  description
             String[] cols = line.split(COMMA);
 
+            Log.d("marker:", line);
             if (cols.length >= 4 ) {
                 double lat = parseDouble(cols[2]);
                 double lon = parseDouble(cols[3]);
