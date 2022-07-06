@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Marker marker = new Marker( mMapView );
         marker.setPosition( new GeoPoint(node.lat, node.lon ) );
         marker.setTitle ( node.title );
+
         marker.setSnippet( node.description );
         mMapView.getOverlays().add(marker);
     } // for
