@@ -62,7 +62,6 @@ public class MarkerInterFace {
                 double lon = parseDouble(cols[3]);
                 String title = cols[0];
 
-                Log.d("kasu",(String)cols[0]);
                 String description = cols[1];
                 log_d(  lat + SPACE + lon + title + SPACE + description );
                 Node node = new Node( lat, lon, title, description );
