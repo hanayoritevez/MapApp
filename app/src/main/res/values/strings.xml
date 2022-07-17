@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Map App</string>
+    <string name="list_description1">Test</string>
+    <string name="list_description2">test</string>
 </resources>

@@ -18,7 +18,7 @@ package com.example.mapapp;
 
 
 /**
- *  class MarkerInterFacce
+ *  class MarkerInterFace
  */
 public class MarkerInterFace {
 
