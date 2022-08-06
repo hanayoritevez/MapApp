@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private List<String> iDescriptions = new ArrayList<>();
     private List<GeoPoint> iLocation = new ArrayList<>();
 
+    private List<Integer> jImages = new ArrayList<>();
+    private List<String> jTitles = new ArrayList<>();
+    private List<String> jDescriptions = new ArrayList<>();
+    private List<GeoPoint> jLocation = new ArrayList<>();
+
+    MyAdapter rAdapter = new MyAdapter(iImages, iTitles, iDescriptions,iLocation);
+    SubAdapter sAdapter = new SubAdapter(jImages, jTitles, jDescriptions,jLocation);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,33 +80,29 @@ public class MainActivity extends AppCompatActivity {
         ////// Recycler View
 
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView_sub = findViewById(R.id.sub_recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
+        recyclerView_sub.setHasFixedSize(true);
 
         // use a linear layout manager
         RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager sLayoutManager = new LinearLayoutManager(this);
+
+       sLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         recyclerView.setLayoutManager(rLayoutManager);
-
-//        iImages.add(R.drawable.onsen);
-//        iTitles.add("選択してくれ");
-//        iDescriptions.add("選択してくれ");
-//        iLocation.add(current_mapinfo.position);
-
-        RecyclerView.Adapter rAdapter = new MyAdapter(iImages, iTitles, iDescriptions,iLocation);
-
-        Log.d("main","a");//log
+        recyclerView_sub.setLayoutManager(sLayoutManager);
 
         recyclerView.setAdapter(rAdapter);
-
-        Log.d("main","b");//log
+        recyclerView_sub.setAdapter(sAdapter);
 
         //interface部分
         ItemTouchHelper mIth  = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN ,
-                        ItemTouchHelper.LEFT) {
+                        ItemTouchHelper.RIGHT) {
 
                     @Override
                     public boolean onMove(@NonNull RecyclerView recyclerView,
@@ -115,15 +118,56 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         final int fromPos = viewHolder.getAdapterPosition();
+
+                        sAdapter.add(rAdapter.getInfo(fromPos));
+                        sAdapter.notifyDataSetChanged();
+
                         iImages.remove(fromPos);
                         iTitles.remove(fromPos);
                         iDescriptions.remove(fromPos);
                         iLocation.remove(fromPos);
                         rAdapter.notifyItemRemoved(fromPos);
+
+
                     }
                 });
 
+
+        ItemTouchHelper mIth_sub  = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ,
+                        ItemTouchHelper.DOWN|ItemTouchHelper.UP ) {
+
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
+
+                        final int fromPos = viewHolder.getAdapterPosition();
+                        final int toPos = target.getAdapterPosition();
+                        rAdapter.notifyItemMoved(fromPos, toPos);
+                        return true;// true if moved, false otherwise
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        final int fromPos = viewHolder.getAdapterPosition();
+
+
+
+                        jImages.remove(fromPos);
+                        jTitles.remove(fromPos);
+                        jDescriptions.remove(fromPos);
+                        jLocation.remove(fromPos);
+                        sAdapter.notifyItemRemoved(fromPos);
+
+
+                    }
+
+
+                });
+
         mIth.attachToRecyclerView(recyclerView);
+        mIth_sub.attachToRecyclerView(recyclerView_sub);
 
     }
 
@@ -142,9 +186,19 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public boolean onMarkerClick(Marker marker, MapView mMapView) {
                                                 marker.showInfoWindow();
-                                                current_mapinfo.title = marker.getSnippet();
-                                                current_mapinfo.description = marker.getTitle();
+                                                current_mapinfo.title = marker.getTitle();
+                                                current_mapinfo.description = marker.getSnippet();
                                                 current_mapinfo.position = marker.getPosition();
+
+
+                                                if (rAdapter.size() ==0){
+                                                    rAdapter.add(current_mapinfo);
+                                                }
+                                                else{
+                                                    rAdapter.replace(current_mapinfo);
+                                                }
+
+                                                rAdapter.notifyDataSetChanged();
                                                 return true;
                                             }
                                         });

@@ -6,9 +6,9 @@
     android:paddingTop="5dp"
     android:paddingRight="20dp"
     android:paddingBottom="5dp"
-    android:background="#91C8CE"
+    android:background="#D2EFF3"
     android:baselineAligned="false"
-    android:layout_height="wrap_content">
+    android:layout_height="700dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
 
         <!-- 枠を入れるだけで深い意味はありません -->
         <ImageView
-            android:background="@color/purple_200"
+            android:background="@color/white"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="@string/list_description1"/>
@@ -32,7 +32,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#BAEBD4"
+        android:background="#AAD8EC"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent">
@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/text_view"
             android:textSize="24sp"
-            android:textColor="#00f"
+            android:textColor="#040459"
             android:paddingStart="20dp"
             android:paddingEnd="10dp"
             android:paddingTop="20dp"
@@ -53,7 +53,6 @@
             android:paddingStart="20dp"
             android:paddingEnd="10dp"
             android:layout_gravity="center_vertical"
-            android:autoLink="email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
