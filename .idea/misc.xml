@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/activity_shiori.xml" value="0.26458333333333334" />
         <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/my_list_view.xml" value="0.18034447821681865" />
+        <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/shiori_view.xml" value="0.26458333333333334" />
         <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/sub_list_view.xml" value="0.18697916666666667" />
+        <entry key="..\:/AppData/Android/Project/MapApp/app/src/main/res/layout/time_view.xml" value="0.26458333333333334" />
       </map>
     </option>
   </component>
